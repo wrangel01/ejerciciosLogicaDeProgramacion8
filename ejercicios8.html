@@ -37,7 +37,7 @@
 /* Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.*/
 
 
-class película {
+class pelicula {
     constructor(id, titulo, director, estreno, pais, generos, calificacion){
         this.id = id;
         this.titulo = titulo;
@@ -48,29 +48,54 @@ class película {
         this.calificacion = calificacion;
 
 
-       this.validarIMDB(id)
-
+        this.validarIMDB(id)
     }
 
     validarCadena(propiedad, valor){
-    if(!valor)return console.warn(`El ${propiedad} "${valor}" esta vacio`);
-    if(typeof valor !== "string") return console.error(`EL ${propiedad} ${valor} ingresado, No es una cadena de texto`);
+
+    if(!valor) return console.warn(`${propiedad} "${valor}" esta vacio`);
+
+    if(typeof valor !== "string") return console.error(`${propiedad} ${valor} ingresado, No es una cadena de texto`);
     
     return true;
+
     }
 
 
-    validarIMDB (id){
-        if(this.validarCadena("IMDB id", id))
-        if(!(/^([a-z]){2}([0-9]{7})$/.test(id))){
-            return console.error(`El IMDB "${id}" No es valido, debe tener 9 caracteres, los 2 primeros letras minusculas los 7 restantes numeros`)
+    validarLongiTudCadena(propiedad, valor, longitud){
+        if(valor.length > longitud) return console.error(`${propiedad} ${valor} excede el numero de caracteres pemritido (${Longitud})`);
+    }
+
+
+    validarIMDB(id){
+        if(this.validarCadena("IMDB id", id)){
+           if(!(/^([a-z]){2}([0-9]{7})$/.test(id))){
+             return console.error(`El IMDB id "${id}" No es valido, debe tener 9 caracteres, los 2 primeros letras minusculas los 7 restantes numeros`)
+           }
         }
-    }   
+    }
+
+
+    validarTitulo(titulo){
+        if(this.validarCadena("titulo", id))
+        this.validarLongitudCadena("Titulo", titulo, 100)
+    }
+
+
+    validarDirector(director){
+        if(this.validarCadena("director", director))
+        this.validarLongitudCadena("director", director, 50)
+    }
+
 }
 
-const peli = new pelicula({
-    id: "hola"
-})
+
+  const peli = new pelicula({
+    id:"tt1234567",
+    titulo:"titulo de la pel",
+    director: "director de la peli"
+  });
+
 
 
 
